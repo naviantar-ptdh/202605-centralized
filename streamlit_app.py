@@ -16,7 +16,7 @@ st.set_page_config(
 )
 
 GITHUB_RAW = "https://raw.githubusercontent.com/naviantar-ptdh/202605-centralized/main"
-APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwmPcoTPCljSWj22rOclkduNJQMvxbPAOs9czLjrMD8yF4TjbXKh2lTp9uLXVYTZUaK/exec"
+APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGPxJ73sh3qMXjHCdzBiH1esuuMi4kGVUQjBAjsfgzvX5W6_yyn7W8hF1dE7qUM2vCxA/exec"
 
 st.markdown(f"""
 <style>
