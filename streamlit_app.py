@@ -784,32 +784,92 @@ def run_tracking():
 
         # ── STEPS TABLE ──
         def _lt_chip(lt_actual_str, lt_budget_str, sla_val, st_code):
-            """Render an LT chip showing actual vs budget days and Ontime/Late."""
-            if lt_actual_str is None and st_code in ("idle",):
-                return '<span class="lt-chip lt-none">—</span>'
-            if lt_actual_str is None and st_code == "active":
-                return '<span class="lt-chip lt-none">In Progress</span>'
+            """Render an LT chip showing actual vs budget days — inline styles only."""
+            _base = (
+                "display:inline-block;padding:3px 9px;border-radius:20px;"
+                "font-size:10.5px;font-weight:600;font-family:'IBM Plex Mono',monospace;"
+                "white-space:nowrap;"
+            )
+            _none_style = _base + "background:rgba(33,28,28,0.05);color:#8A847E;"
+            if lt_actual_str is None and st_code == "idle":
+                return f'<span style="{_none_style}">—</span>'
+            if lt_actual_str is None and st_code in ("active", "failed"):
+                return f'<span style="{_none_style}">In Progress</span>'
 
             sla_lower = sla_val.lower()
-            chip_cls  = "lt-ontime" if "ontime" in sla_lower else ("lt-late" if "late" in sla_lower else "lt-none")
-            label     = "Ontime" if "ontime" in sla_lower else ("Late" if "late" in sla_lower else ("—" if not sla_lower else sla_val))
+            if "ontime" in sla_lower:
+                chip_style = _base + "background:rgba(22,101,52,0.10);color:#166534;"
+            elif "late" in sla_lower:
+                chip_style = _base + "background:rgba(153,27,27,0.10);color:#991B1B;"
+            else:
+                chip_style = _none_style
 
             budget_part = f" / {lt_budget_str}d" if lt_budget_str else ""
-            return f'<span class="lt-chip {chip_cls}">{lt_actual_str}d{budget_part} · {label}</span>'
+            return f'<span style="{chip_style}">{lt_actual_str}d{budget_part}</span>'
 
-        html = """
-        <div class="steps-box">
-          <div class="step-header">
-            <div></div>
-            <div>Stage</div>
-            <div>Status</div>
-            <div>Dates (Start → End)</div>
-            <div>LT / Budget</div>
-            <div>SLA</div>
-          </div>
-        """
+        # ── colour helpers (inline styles, safe in Streamlit) ──
+        _C = {
+            "done":   {"bg": "rgba(22,101,52,0.07)",  "fg": "#166534"},
+            "failed": {"bg": "rgba(153,27,27,0.07)",  "fg": "#991B1B"},
+            "active": {"bg": "rgba(255,80,0,0.07)",   "fg": "#FF5000"},
+            "idle":   {"bg": "rgba(33,28,28,0.05)",   "fg": "#8A847E"},
+        }
 
-        for s in p_data:
+        def _num_cell(cls, icon):
+            c = _C.get(cls, _C["idle"])
+            return (
+                f'<td style="width:38px;padding:10px 6px 10px 16px;vertical-align:middle;">'
+                f'<span style="display:inline-flex;align-items:center;justify-content:center;'
+                f'width:27px;height:27px;border-radius:50%;background:{c["bg"]};'
+                f'color:{c["fg"]};font-size:11px;font-weight:700;font-family:\'IBM Plex Mono\',monospace;">'
+                f'{icon}</span></td>'
+            )
+
+        def _badge_cell(cls, txt, width="110px"):
+            c = _C.get(cls, _C["idle"])
+            return (
+                f'<td style="width:{width};padding:10px 8px;vertical-align:middle;">'
+                f'<span style="display:inline-block;padding:3px 10px;border-radius:20px;'
+                f'background:{c["bg"]};color:{c["fg"]};font-size:10px;font-weight:600;">'
+                f'{txt}</span></td>'
+            )
+
+        def _sla_cell(sla_str):
+            sl = sla_str.lower()
+            if "ontime" in sl:
+                bg, fg, lbl = "rgba(22,101,52,0.07)", "#166534", "Ontime"
+            elif "late" in sl:
+                bg, fg, lbl = "rgba(153,27,27,0.07)", "#991B1B", "Late"
+            else:
+                bg, fg, lbl = "rgba(33,28,28,0.05)", "#8A847E", sla_str or "—"
+            return (
+                f'<td style="width:90px;padding:10px 16px 10px 8px;vertical-align:middle;">'
+                f'<span style="display:inline-block;padding:3px 10px;border-radius:20px;'
+                f'background:{bg};color:{fg};font-size:10px;font-weight:600;">{lbl}</span></td>'
+            )
+
+        # Table wrapper
+        html = (
+            '<table style="width:100%;border-collapse:collapse;background:#fff;'
+            'border-radius:10px;overflow:hidden;border:1.5px solid rgba(33,28,28,0.09);'
+            'box-shadow:0 1px 3px rgba(26,22,20,0.07);font-family:\'Sora\',sans-serif;">'
+            # Header
+            '<thead><tr style="background:#F0EDEA;">'
+            '<th style="width:38px;padding:8px 6px 8px 16px;"></th>'
+            '<th style="text-align:left;padding:8px;font-size:9px;font-weight:700;'
+            'text-transform:uppercase;letter-spacing:0.08em;color:#8A847E;">Stage</th>'
+            '<th style="width:110px;text-align:left;padding:8px;font-size:9px;font-weight:700;'
+            'text-transform:uppercase;letter-spacing:0.08em;color:#8A847E;">Status</th>'
+            '<th style="width:210px;text-align:left;padding:8px;font-size:9px;font-weight:700;'
+            'text-transform:uppercase;letter-spacing:0.08em;color:#8A847E;">Start → End</th>'
+            '<th style="width:160px;text-align:left;padding:8px;font-size:9px;font-weight:700;'
+            'text-transform:uppercase;letter-spacing:0.08em;color:#8A847E;">LT / Budget</th>'
+            '<th style="width:90px;text-align:left;padding:8px 16px 8px 8px;font-size:9px;font-weight:700;'
+            'text-transform:uppercase;letter-spacing:0.08em;color:#8A847E;">SLA</th>'
+            '</tr></thead><tbody>'
+        )
+
+        for i, s in enumerate(p_data):
             cls = s["status"]
             if cls == "done":
                 icon = "✓"; badge_txt = "Done"
@@ -820,29 +880,32 @@ def run_tracking():
             else:
                 icon = str(s["idx"] + 1); badge_txt = "Pending"
 
-            # SLA chip
+            # LT / Budget chip
             lt_chip_html = _lt_chip(s["lt_actual"], s["lt_budget"], s["sla"], cls)
 
-            # Separate Ontime / Late badge
-            sla_lower = s["sla"].lower()
-            if "ontime" in sla_lower:
-                sla_badge = '<span class="step-badge done">Ontime</span>'
-            elif "late" in sla_lower:
-                sla_badge = '<span class="step-badge failed">Late</span>'
-            else:
-                sla_badge = f'<span class="step-badge idle">{s["sla"] or "—"}</span>'
+            border_bottom = "" if i == len(p_data) - 1 else "border-bottom:1px solid rgba(33,28,28,0.08);"
+            row_bg = "background:#fff;" if i % 2 == 0 else "background:#faf9f8;"
 
-            html += f"""
-            <div class="step-row">
-              <div class="step-num {cls}">{icon}</div>
-              <div class="step-name">{s['name']}</div>
-              <span class="step-badge {cls}">{badge_txt}</span>
-              <div class="step-dates"><span>{s['start']}</span><span>→ {s['end']}</span></div>
-              <div>{lt_chip_html}</div>
-              <div>{sla_badge}</div>
-            </div>"""
+            html += (
+                f'<tr style="{row_bg}{border_bottom}">'
+                + _num_cell(cls, icon)
+                # Stage name
+                + f'<td style="padding:10px 8px;vertical-align:middle;'
+                  f'font-size:12.5px;font-weight:600;color:#1A1614;">{s["name"]}</td>'
+                # Status badge
+                + _badge_cell(cls, badge_txt)
+                # Dates
+                + f'<td style="width:210px;padding:10px 8px;vertical-align:middle;'
+                  f'font-size:10.5px;color:#8A847E;font-family:\'IBM Plex Mono\',monospace;">'
+                  f'{s["start"]}<br>→ {s["end"]}</td>'
+                # LT chip
+                + f'<td style="width:160px;padding:10px 8px;vertical-align:middle;">{lt_chip_html}</td>'
+                # SLA badge
+                + _sla_cell(s["sla"])
+                + '</tr>'
+            )
 
-        html += "</div>"
+        html += '</tbody></table>'
         st.markdown(html, unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
