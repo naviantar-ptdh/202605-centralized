@@ -1,7 +1,7 @@
 """
 HR Centralized System — Darma Henwa Brand
-v3: Professional redesign with DH brand, real images from GitHub, 
-    embedded AppScript, failed = X mark, no team notes
+v4: + SLA per stage, failed step shows "Failed Here" with ✕, 
+    progress bar merah jika failed, SLA badge (Ontime/Late) per step
 """
 
 import streamlit as st
@@ -100,7 +100,6 @@ html, body, .stApp {{
 /* ── HOME ── */
 .home-wrap {{ padding: 32px 40px 60px; }}
 
-/* Section label */
 .sec-label {{
   display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
 }}
@@ -115,7 +114,6 @@ html, body, .stApp {{
   background: var(--dh-orange);
 }}
 
-/* Dashboard embed */
 .dash-frame {{
   background: var(--dh-black);
   border-radius: var(--radius-lg);
@@ -148,7 +146,6 @@ html, body, .stApp {{
   width: 10px; height: 10px; border-radius: 50%; display: block;
 }}
 
-/* Nav cards */
 .nav-grid {{
   display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
   margin-top: 4px;
@@ -233,20 +230,17 @@ div[data-testid="metric-container"] div[data-testid="stMetricValue"] {{
   font-weight: 600 !important;
 }}
 
-/* ── SELECTBOX ── */
 div[data-testid="stSelectbox"] > div > div {{
   background: var(--surface) !important; border: 1.5px solid var(--border) !important;
   border-radius: var(--radius-sm) !important; color: var(--text) !important; font-size: 13px !important;
 }}
 
-/* ── TEXT INPUT ── */
 .stTextInput > div > div {{
   background: var(--surface) !important; border: 1.5px solid var(--border) !important;
   border-radius: var(--radius-sm) !important;
 }}
 .stTextInput input {{ color: var(--text) !important; font-size: 13px !important; }}
 
-/* ── TEXT AREA ── */
 .stTextArea > div > div {{
   background: var(--surface) !important; border: 1.5px solid var(--border) !important;
   border-radius: var(--radius-sm) !important;
@@ -256,21 +250,18 @@ div[data-testid="stSelectbox"] > div > div {{
   font-family: 'IBM Plex Mono', monospace !important;
 }}
 
-/* ── DATAFRAME ── */
 div[data-testid="stDataFrame"] {{
   border-radius: var(--radius) !important;
   border: 1.5px solid var(--border) !important; overflow: hidden !important;
   box-shadow: var(--shadow-sm) !important;
 }}
 
-/* ── PROGRESS ── */
 .stProgress > div > div {{ background: var(--surface-3) !important; border-radius: 3px !important; }}
 .stProgress > div > div > div {{
   background: linear-gradient(90deg, var(--dh-orange), var(--dh-orange-light)) !important;
   border-radius: 3px !important;
 }}
 
-/* ── BUTTONS ── */
 button[kind="primary"] {{
   background: var(--accent) !important; border: none !important; color: #fff !important;
   font-family: 'Sora', sans-serif !important; font-weight: 600 !important;
@@ -288,7 +279,6 @@ button[kind="secondary"]:hover {{
   border-color: var(--border-mid) !important; color: var(--text) !important;
 }}
 
-/* ── ALERTS ── */
 .stInfo, .stSuccess, .stWarning, .stError {{
   border-radius: var(--radius-sm) !important; font-size: 13px !important;
   font-family: 'Sora', sans-serif !important;
@@ -339,13 +329,31 @@ button[kind="secondary"]:hover {{
   border-radius: var(--radius); overflow: hidden; margin-bottom: 18px;
   box-shadow: var(--shadow-sm);
 }}
+
+/* Header row for steps */
+.step-header {{
+  display: grid;
+  grid-template-columns: 34px 1fr 80px 200px 70px 90px;
+  gap: 10px;
+  padding: 8px 18px;
+  background: var(--surface-2);
+  border-bottom: 1.5px solid var(--border);
+  font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--text-muted);
+  align-items: center;
+}}
+
 .step-row {{
-  display: flex; align-items: center; gap: 14px;
+  display: grid;
+  grid-template-columns: 34px 1fr 80px 200px 70px 90px;
+  gap: 10px;
+  align-items: center;
   padding: 11px 18px; border-bottom: 1px solid var(--border);
   transition: background 0.14s;
 }}
 .step-row:last-child {{ border-bottom: none; }}
 .step-row:hover {{ background: var(--surface-2); }}
+
 .step-num {{
   width: 27px; height: 27px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -356,18 +364,49 @@ button[kind="secondary"]:hover {{
 .step-num.active {{ background: var(--accent-soft); color: var(--accent); }}
 .step-num.idle   {{ background: var(--surface-2); color: var(--text-muted); }}
 .step-num.failed {{ background: var(--red-bg); color: var(--red); }}
-.step-name {{ font-size: 12.5px; font-weight: 600; flex: 1; color: var(--text); }}
+
+.step-name {{ font-size: 12.5px; font-weight: 600; color: var(--text); }}
+
+/* LT badge */
+.lt-chip {{
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 8px; border-radius: 20px;
+  font-size: 10.5px; font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace;
+  white-space: nowrap;
+}}
+.lt-ontime {{ background: var(--green-bg); color: var(--green); }}
+.lt-late   {{ background: var(--red-bg); color: var(--red); }}
+.lt-none   {{ background: var(--surface-2); color: var(--text-muted); }}
+
 .step-dates {{
   font-size: 10.5px; color: var(--text-muted);
   font-family: 'IBM Plex Mono', monospace;
+  display: flex; flex-direction: column; gap: 2px;
 }}
+
 .step-badge {{
   font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 20px;
+  text-align: center;
 }}
 .step-badge.done   {{ background: var(--green-bg); color: var(--green); }}
 .step-badge.active {{ background: var(--accent-soft); color: var(--accent); }}
 .step-badge.idle   {{ background: var(--surface-2); color: var(--text-muted); }}
 .step-badge.failed {{ background: var(--red-bg); color: var(--red); }}
+
+/* ── INFO GRID ── */
+.info-grid {{
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px;
+}}
+.info-item {{
+  background: var(--surface-2); border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}}
+.info-item-label {{
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.07em; color: var(--text-muted); margin-bottom: 4px;
+}}
+.info-item-val {{ font-size: 13px; font-weight: 600; color: var(--text); }}
 
 /* ── REC ROOM ── */
 .rec-section {{
@@ -389,20 +428,6 @@ button[kind="secondary"]:hover {{
 .rec-section-title {{ font-size: 13px; font-weight: 700; color: var(--text); }}
 .rec-section-sub {{ font-size: 11px; color: var(--text-muted); margin-top: 1px; }}
 .rec-body {{ padding: 20px; }}
-
-/* Tracking info grid */
-.info-grid {{
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;
-}}
-.info-item {{
-  background: var(--surface-2); border-radius: var(--radius-sm);
-  padding: 12px 14px;
-}}
-.info-item-label {{
-  font-size: 10px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.07em; color: var(--text-muted); margin-bottom: 4px;
-}}
-.info-item-val {{ font-size: 13px; font-weight: 600; color: var(--text); }}
 
 </style>
 """, unsafe_allow_html=True)
@@ -436,7 +461,6 @@ st.markdown(f"""
 def run_home():
     st.markdown('<div class="home-wrap">', unsafe_allow_html=True)
 
-    # ── Dashboard section label ──
     st.markdown("""
     <div class="sec-label">
       <div class="sec-label-text"><div class="sec-label-dot"></div>Recruitment Dashboard · Live</div>
@@ -444,7 +468,6 @@ def run_home():
     </div>
     """, unsafe_allow_html=True)
 
-    # ── Looker embed ──
     st.markdown(f"""
     <div class="dash-frame">
       <div class="dash-frame-header">
@@ -466,7 +489,6 @@ def run_home():
     </div>
     """, unsafe_allow_html=True)
 
-    # ── Tools section label ──
     st.markdown("""
     <div class="sec-label" style="margin-top:4px;">
       <div class="sec-label-line"></div>
@@ -475,16 +497,13 @@ def run_home():
     </div>
     """, unsafe_allow_html=True)
 
-    # ── Two nav cards ──
     c1, c2 = st.columns(2, gap="small")
     with c1:
         st.markdown(f"""
         <div class="nav-card">
           <div class="nav-card-stripe"></div>
           <div class="nav-card-icon">
-            <img src="{GITHUB_RAW}/Search.png"
-                 onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2242%22 height=%2242%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23FF5000%22 stroke-width=%222%22><circle cx=%2211%22 cy=%2211%22 r=%228%22/><path d=%22m21 21-4.35-4.35%22/></svg>'"
-                 alt="Search" />
+            <img src="{GITHUB_RAW}/Search.png" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2242%22 height=%2242%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23FF5000%22 stroke-width=%222%22><circle cx=%2211%22 cy=%2211%22 r=%228%22/><path d=%22m21 21-4.35-4.35%22/></svg>'" alt="Search" />
           </div>
           <div class="nav-card-title">Candidate Tracking</div>
           <div class="nav-card-desc">Monitor candidate pipeline & recruitment stage progress in real-time. Search by position or candidate ID.</div>
@@ -501,9 +520,7 @@ def run_home():
         <div class="nav-card">
           <div class="nav-card-stripe"></div>
           <div class="nav-card-icon">
-            <img src="{GITHUB_RAW}/home.png"
-                 onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2242%22 height=%2242%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23FF5000%22 stroke-width=%222%22><path d=%22M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z%22/><polyline points=%229 22 9 12 15 12 15 22%22/></svg>'"
-                 alt="Room" />
+            <img src="{GITHUB_RAW}/home.png" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2242%22 height=%2242%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23FF5000%22 stroke-width=%222%22><path d=%22M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z%22/><polyline points=%229 22 9 12 15 12 15 22%22/></svg>'" alt="Room" />
           </div>
           <div class="nav-card-title">Recruitment Room</div>
           <div class="nav-card-desc">Forms, spreadsheet links, and quick actions — all recruitment tools in one workspace.</div>
@@ -524,16 +541,13 @@ def run_home():
 def run_tracking():
     st.markdown('<div class="page-wrap">', unsafe_allow_html=True)
 
-    # Header
     col_hdr, col_back = st.columns([5, 1])
     with col_hdr:
         st.markdown(f"""
         <div class="page-top" style="border:none;padding-bottom:0;margin-bottom:0;">
           <div class="page-top-left">
             <div class="page-icon">
-              <img src="{GITHUB_RAW}/Search.png"
-                   onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23FF5000%22 stroke-width=%222%22><circle cx=%2211%22 cy=%2211%22 r=%228%22/><path d=%22m21 21-4.35-4.35%22/></svg>'"
-                   alt="Tracking" />
+              <img src="{GITHUB_RAW}/Search.png" alt="Tracking" />
             </div>
             <div>
               <div class="page-title">Candidate Tracking</div>
@@ -551,13 +565,12 @@ def run_tracking():
 
     st.markdown("<div style='height:1.5px;background:var(--border);margin:14px 0 22px;'></div>", unsafe_allow_html=True)
 
-    # Load data
     @st.cache_data(ttl=60)
     def load_data():
         url = "https://docs.google.com/spreadsheets/d/1eysrca2wIWsx2LZeP3z2qlRawLzdRBYxsDf6JizcaZc/export?format=csv"
         try:
             df = pd.read_csv(url)
-            df.columns = df.columns.str.lower()
+            df.columns = df.columns.str.lower().str.strip()
             for c in ["candidate_id", "position_name", "departement", "level", "loc", "status1"]:
                 if c in df.columns:
                     df[c] = df[c].fillna("Unknown")
@@ -592,12 +605,12 @@ def run_tracking():
 
         st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
 
-        cols = [c for c in ["candidate_id","position_name","departement","level","loc","last_progress","total_lt","status1"] if c in filtered.columns]
+        cols = [c for c in ["candidate_id","position_name","departement","level","loc","last_progress","tot_lt","status1"] if c in filtered.columns]
         disp = filtered[cols].copy()
-        if "total_lt" in disp.columns:
-            disp["total_lt"] = pd.to_numeric(disp["total_lt"], errors="coerce").fillna(0).astype(int)
+        if "tot_lt" in disp.columns:
+            disp["tot_lt"] = pd.to_numeric(disp["tot_lt"], errors="coerce").fillna(0).astype(int)
         if "status1" in disp.columns:
-            disp = disp.rename(columns={"status1": "Status"})
+            disp = disp.rename(columns={"status1": "Status", "tot_lt": "Total LT (days)"})
 
         def color_status(val):
             v = str(val).upper()
@@ -638,75 +651,126 @@ def run_tracking():
         </div>
         """, unsafe_allow_html=True)
 
-        # Info grid instead of metrics row (cleaner layout)
         pos  = row.get("position_name", "—")
         dept = row.get("departement",   "—")
         lvl  = row.get("level",         "—")
         loc  = row.get("loc",           "—")
-        sla  = row.get("total_lt",      "—")
-        if isinstance(sla, float): sla = int(sla)
-        last = row.get("last_progress", "—")
+        # Use tot_lt (final total LT) and budget_lt for summary
+        tot_lt     = row.get("tot_lt", row.get("total_lt", "—"))
+        budget_lt  = row.get("budget_lt", "—")
+        status_lt  = row.get("status_lt", "—")
+        last       = row.get("last_progress", "—")
+        divisi     = row.get("divisi", "—")
+
+        if isinstance(tot_lt,    float): tot_lt    = int(tot_lt)
+        if isinstance(budget_lt, float): budget_lt = int(budget_lt)
+
+        # SLA color for overall
+        lt_cls = ""
+        if str(status_lt).lower() == "onbudget":
+            lt_cls = "color:var(--green);font-weight:700;"
+        elif str(status_lt).lower() == "overbudget":
+            lt_cls = "color:var(--red);font-weight:700;"
 
         st.markdown(f"""
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;">
           <div class="info-item"><div class="info-item-label">Position</div><div class="info-item-val">{pos}</div></div>
           <div class="info-item"><div class="info-item-label">Department</div><div class="info-item-val">{dept}</div></div>
+          <div class="info-item"><div class="info-item-label">Division</div><div class="info-item-val">{divisi}</div></div>
           <div class="info-item"><div class="info-item-label">Level</div><div class="info-item-val">{lvl}</div></div>
           <div class="info-item"><div class="info-item-label">Location</div><div class="info-item-val">{loc}</div></div>
-          <div class="info-item"><div class="info-item-label">SLA (days)</div><div class="info-item-val">{sla}</div></div>
           <div class="info-item"><div class="info-item-label">Last Progress</div><div class="info-item-val">{last}</div></div>
+          <div class="info-item"><div class="info-item-label">Total LT (days)</div><div class="info-item-val">{tot_lt}</div></div>
+          <div class="info-item"><div class="info-item-label">Budget LT (days)</div><div class="info-item-val">{budget_lt}</div></div>
+          <div class="info-item"><div class="info-item-label">LT Status</div><div class="info-item-val" style="{lt_cls}">{status_lt}</div></div>
         </div>
         """, unsafe_allow_html=True)
 
-        # Recruitment steps
-        steps = [
-            ("Screening CV",   "start_screening_cv",   "complete_screening_cv"),
-            ("HR Interview",   "start_interview_hr",   "complete_interview_hr"),
-            ("User Interview", "start_interview_user", "complete_interview_user"),
-            ("Psychotest",     "start_psychotest",     "complete_psychotest"),
-            ("Offering",       "start_offering",       "complete_offering"),
-            ("MCU",            "start_mcu",            "mcu_date"),
-            ("Review MCU",     "start_review_mcu",     "review_mcu"),
-            ("FU MCU",         "start_fu_mcu",         "complete_fu_mcu"),
-            ("Onboarding",     "date_onboarding",      "date_onboarding"),
+        # ── STEP DEFINITIONS ──
+        # Each entry: (display_name, start_col, end_col, lt_col, b_lt_col, sla_col)
+        # lt_col  = actual lead time (days) for this stage
+        # b_lt_col = budget lead time for this stage
+        # sla_col = "Ontime" / "Late" column (sla1..sla10/sla11)
+        steps_def = [
+            ("PRF Routing",    "start_prf_routing",    "complete_prf_routing",    "lt_prf",           "b_lt_prf",           "sla1"),
+            ("Screening CV",   "start_screening_cv",   "complete_screening_cv",   "lt_screening",     "b_lt_screening",     "sla2"),
+            ("HR Interview",   "start_interview_hr",   "complete_interview_hr",   "lt_hr_interview",  "b_lt_hr_interview",  "sla3"),
+            ("User Interview", "start_interview_user", "complete_interview_user", "lt_user_interview","b_lt_user_interview","sla4"),
+            ("Psychotest",     "start_psychotest",     "complete_psychotest",     "lt_psikotest",     "b_lt_psikotest",     "sla5"),
+            ("Offering",       "start_offering",       "complete_offering",       "lt_offering",      "b_lt_offering",      "sla6"),
+            ("MCU",            "start_mcu",            "mcu_date",                "lt_mcu",           "b_lt_mcu",           "sla7"),
+            ("Review MCU",     "start_review_mcu",     "review_mcu",              "lt_review_mcu",    "b_lt_review_mcu",    "sla8"),
+            ("FU MCU",         "start_fu_mcu",         "complete_fu_mcu",         "lt_fu_mcu",        "b_lt_fu_mcu",        "sla9"),
+            ("Onboarding",     "date_onboarding",      "date_onboarding",         "lt_omn",           "b_lt_omn",           "sla10"),
         ]
 
+        # Also include Technical Test if data exists
+        tech_start = row.get("start_technical_test")
+        tech_end   = row.get("complete_technical_test")
+        if pd.notna(tech_start) and str(tech_start).strip() not in ("", "nan"):
+            steps_def.insert(4, (
+                "Technical Test", "start_technical_test", "complete_technical_test",
+                "lt_tech_test", "b_lt_tech", "sla11"
+            ))
+
+        # ── BUILD STEP DATA ──
         p_data = []
         done_count = 0
         last_active_idx = -1
-        for i, (name, s_col, e_col) in enumerate(steps):
+
+        for i, (name, s_col, e_col, lt_col, b_lt_col, sla_col) in enumerate(steps_def):
             s_val = row.get(s_col)
             e_val = row.get(e_col)
             has_start = pd.notna(s_val) and str(s_val).strip() not in ("", "nan")
             has_end   = pd.notna(e_val) and str(e_val).strip() not in ("", "nan")
+
             if has_end:
-                st_code = "done"; done_count += 1
+                st_code = "done"
+                done_count += 1
             elif has_start:
-                st_code = "active"; last_active_idx = i
+                st_code = "active"
+                last_active_idx = i
             else:
                 st_code = "idle"
+
+            # LT values
+            lt_actual = row.get(lt_col)
+            lt_budget = row.get(b_lt_col)
+            sla_val   = str(row.get(sla_col, "")).strip()
+
+            lt_actual_str = str(int(lt_actual)) if pd.notna(lt_actual) and str(lt_actual).strip() not in ("", "nan") else None
+            lt_budget_str = str(int(lt_budget)) if pd.notna(lt_budget) and str(lt_budget).strip() not in ("", "nan") else None
+
             p_data.append({
-                "name": name,
-                "start": str(s_val) if has_start else "—",
-                "end":   str(e_val) if has_end   else "—",
-                "status": st_code,
-                "idx": i
+                "name":       name,
+                "start":      str(s_val) if has_start else "—",
+                "end":        str(e_val) if has_end   else "—",
+                "status":     st_code,
+                "idx":        i,
+                "lt_actual":  lt_actual_str,
+                "lt_budget":  lt_budget_str,
+                "sla":        sla_val,
             })
 
-        prog_pct = done_count / len(steps)
-        prog_color = "var(--red)" if is_failed else "var(--accent)"
+        prog_pct = done_count / len(p_data) if p_data else 0
 
-        # If failed: the last active step is the failure point
+        # Mark failure point
         if is_failed and last_active_idx >= 0:
             p_data[last_active_idx]["status"] = "failed"
 
-        # Progress bar
-        bar_gradient = "linear-gradient(90deg, #991B1B, #EF4444)" if is_failed else "linear-gradient(90deg, var(--dh-orange), var(--dh-orange-light))"
+        # ── PROGRESS BAR ──
+        bar_gradient = (
+            "linear-gradient(90deg, #991B1B, #EF4444)"
+            if is_failed
+            else "linear-gradient(90deg, var(--dh-orange), var(--dh-orange-light))"
+        )
+        prog_color = "var(--red)" if is_failed else "var(--accent)"
+
         st.markdown(f"""
         <div class="prog-box">
           <div class="prog-meta">
             <span style="font-size:13px;font-weight:700;">Recruitment Progress</span>
-            <span style="font-size:11px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;">{done_count}/{len(steps)} stages complete</span>
+            <span style="font-size:11px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;">{done_count}/{len(p_data)} stages complete</span>
           </div>
           <div class="prog-track">
             <div style="height:100%;width:{prog_pct*100:.0f}%;background:{bar_gradient};border-radius:3px;transition:width 0.6s ease;"></div>
@@ -718,29 +782,66 @@ def run_tracking():
         </div>
         """, unsafe_allow_html=True)
 
-        # Steps list — failed step shows ✕
-        html = '<div class="steps-box">'
+        # ── STEPS TABLE ──
+        def _lt_chip(lt_actual_str, lt_budget_str, sla_val, st_code):
+            """Render an LT chip showing actual vs budget days and Ontime/Late."""
+            if lt_actual_str is None and st_code in ("idle",):
+                return '<span class="lt-chip lt-none">—</span>'
+            if lt_actual_str is None and st_code == "active":
+                return '<span class="lt-chip lt-none">In Progress</span>'
+
+            sla_lower = sla_val.lower()
+            chip_cls  = "lt-ontime" if "ontime" in sla_lower else ("lt-late" if "late" in sla_lower else "lt-none")
+            label     = "Ontime" if "ontime" in sla_lower else ("Late" if "late" in sla_lower else ("—" if not sla_lower else sla_val))
+
+            budget_part = f" / {lt_budget_str}d" if lt_budget_str else ""
+            return f'<span class="lt-chip {chip_cls}">{lt_actual_str}d{budget_part} · {label}</span>'
+
+        html = """
+        <div class="steps-box">
+          <div class="step-header">
+            <div></div>
+            <div>Stage</div>
+            <div>Status</div>
+            <div>Dates (Start → End)</div>
+            <div>LT / Budget</div>
+            <div>SLA</div>
+          </div>
+        """
+
         for s in p_data:
             cls = s["status"]
             if cls == "done":
-                icon = "✓"
-                badge_txt = "Done"
+                icon = "✓"; badge_txt = "Done"
             elif cls == "failed":
-                icon = "✕"
-                badge_txt = "Failed Here"
+                icon = "✕"; badge_txt = "Failed Here"
             elif cls == "active":
-                icon = str(s["idx"] + 1)
-                badge_txt = "In Progress"
+                icon = str(s["idx"] + 1); badge_txt = "In Progress"
             else:
-                icon = str(s["idx"] + 1)
-                badge_txt = "Pending"
+                icon = str(s["idx"] + 1); badge_txt = "Pending"
+
+            # SLA chip
+            lt_chip_html = _lt_chip(s["lt_actual"], s["lt_budget"], s["sla"], cls)
+
+            # Separate Ontime / Late badge
+            sla_lower = s["sla"].lower()
+            if "ontime" in sla_lower:
+                sla_badge = '<span class="step-badge done">Ontime</span>'
+            elif "late" in sla_lower:
+                sla_badge = '<span class="step-badge failed">Late</span>'
+            else:
+                sla_badge = f'<span class="step-badge idle">{s["sla"] or "—"}</span>'
+
             html += f"""
             <div class="step-row">
               <div class="step-num {cls}">{icon}</div>
               <div class="step-name">{s['name']}</div>
-              <div class="step-dates">{s['start']} → {s['end']}</div>
               <span class="step-badge {cls}">{badge_txt}</span>
+              <div class="step-dates"><span>{s['start']}</span><span>→ {s['end']}</span></div>
+              <div>{lt_chip_html}</div>
+              <div>{sla_badge}</div>
             </div>"""
+
         html += "</div>"
         st.markdown(html, unsafe_allow_html=True)
 
@@ -759,9 +860,7 @@ def run_rec_room():
         <div class="page-top" style="border:none;padding-bottom:0;margin-bottom:0;">
           <div class="page-top-left">
             <div class="page-icon">
-              <img src="{GITHUB_RAW}/home.png"
-                   onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23FF5000%22 stroke-width=%222%22><path d=%22M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z%22/><polyline points=%229 22 9 12 15 12 15 22%22/></svg>'"
-                   alt="Room" />
+              <img src="{GITHUB_RAW}/home.png" alt="Room" />
             </div>
             <div>
               <div class="page-title">Recruitment Room</div>
@@ -779,14 +878,12 @@ def run_rec_room():
 
     st.markdown("<div style='height:1.5px;background:var(--border);margin:14px 0 22px;'></div>", unsafe_allow_html=True)
 
-    # ── SECTION 1: RECRUITMENT FORM (embedded directly) ──
+    # ── SECTION 1: RECRUITMENT FORM ──
     st.markdown(f"""
     <div class="rec-section">
       <div class="rec-section-hdr">
         <div class="rec-section-icon">
-          <img src="{GITHUB_RAW}/form.png"
-               onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23FF5000%22 stroke-width=%222%22><path d=%22M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z%22/><polyline points=%2214 2 14 8 20 8%22/><line x1=%2216%22 y1=%2213%22 x2=%228%22 y2=%2213%22/><line x1=%2216%22 y1=%2217%22 x2=%228%22 y2=%2217%22/><polyline points=%2210 9 9 9 8 9%22/></svg>'"
-               alt="Form" />
+          <img src="{GITHUB_RAW}/form.png" alt="Form" />
         </div>
         <div>
           <div class="rec-section-title">Recruitment Form</div>
@@ -812,9 +909,7 @@ def run_rec_room():
     <div class="rec-section">
       <div class="rec-section-hdr">
         <div class="rec-section-icon">
-          <img src="{GITHUB_RAW}/dashboard.png"
-               onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23FF5000%22 stroke-width=%222%22><rect x=%223%22 y=%223%22 width=%227%22 height=%227%22/><rect x=%2214%22 y=%223%22 width=%227%22 height=%227%22/><rect x=%2214%22 y=%2214%22 width=%227%22 height=%227%22/><rect x=%223%22 y=%2214%22 width=%227%22 height=%227%22/></svg>'"
-               alt="Links" />
+          <img src="{GITHUB_RAW}/dashboard.png" alt="Links" />
         </div>
         <div>
           <div class="rec-section-title">Quick Links</div>
@@ -826,7 +921,7 @@ def run_rec_room():
 
     st.markdown("""
     <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:10px;">
-    ⚠️ Note: Links are stored in session only — they reset on page refresh. To make links permanent, add them directly to the code.
+    ⚠️ Note: Links reset on page refresh. To make permanent, add them directly in the code.
     </div>
     """, unsafe_allow_html=True)
 
@@ -862,9 +957,7 @@ def run_rec_room():
     <div class="rec-section">
       <div class="rec-section-hdr">
         <div class="rec-section-icon">
-          <img src="{GITHUB_RAW}/dashboard.png"
-               onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23FF5000%22 stroke-width=%222%22><polygon points=%2213 2 3 14 12 14 11 22 21 10 12 10 13 2%22/></svg>'"
-               alt="Actions" />
+          <img src="{GITHUB_RAW}/dashboard.png" alt="Actions" />
         </div>
         <div>
           <div class="rec-section-title">Quick Actions</div>
@@ -876,41 +969,17 @@ def run_rec_room():
 
     qa1, qa2, qa3, qa4 = st.columns(4)
     with qa1:
-        st.markdown(f"""
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-          <img src="{GITHUB_RAW}/ppt-open-file-format-with-pie-chart.png" style="width:22px;height:22px;object-fit:contain;" onerror="this.style.display='none'" />
-          <span style="font-size:12px;color:var(--text-muted);">PPT Report</span>
-        </div>
-        """, unsafe_allow_html=True)
         if st.button("Download Report PPT", use_container_width=True, key="qa_ppt"):
             st.info("⏳ On progress — PPT report feature is being developed.")
     with qa2:
-        st.markdown(f"""
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-          <img src="{GITHUB_RAW}/dashboard.png" style="width:22px;height:22px;object-fit:contain;" onerror="this.style.display='none'" />
-          <span style="font-size:12px;color:var(--text-muted);">Dashboard</span>
-        </div>
-        """, unsafe_allow_html=True)
         if st.button("Recruitment Dashboard", use_container_width=True, key="qa_mpp"):
             st.session_state.page = "home"
             st.rerun()
     with qa3:
-        st.markdown(f"""
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-          <img src="{GITHUB_RAW}/Search.png" style="width:22px;height:22px;object-fit:contain;" onerror="this.style.display='none'" />
-          <span style="font-size:12px;color:var(--text-muted);">Tracking</span>
-        </div>
-        """, unsafe_allow_html=True)
         if st.button("Go to Tracking", use_container_width=True, key="qa_track"):
             st.session_state.page = "tracking"
             st.rerun()
     with qa4:
-        st.markdown("""
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-          <span style="font-size:18px;">🔄</span>
-          <span style="font-size:12px;color:var(--text-muted);">Cache</span>
-        </div>
-        """, unsafe_allow_html=True)
         if st.button("Refresh Data Cache", use_container_width=True, key="qa_cache"):
             st.cache_data.clear()
             st.success("Cache cleared!")
