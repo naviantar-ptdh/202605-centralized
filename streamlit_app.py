@@ -822,8 +822,8 @@ def run_tracking():
         lvl    = row.get("level", "—")
         loc    = row.get("loc", "—")
         last   = row.get("last_progress", "—")
-        tot_lt = row.get("tot_lt23", "—")
-        bgt_lt = row.get("budget_lt5", "—")
+        tot_lt = row.get("total_lt", "—")
+        bgt_lt = row.get("budget_lt1", "—")
         stat_lt = row.get("status_lt1", "—")
     
 
