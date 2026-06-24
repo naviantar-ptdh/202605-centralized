@@ -822,21 +822,14 @@ def run_tracking():
         lvl    = row.get("level", "—")
         loc    = row.get("loc", "—")
         last   = row.get("last_progress", "—")
-       # Ambil nilai langsung dari kolom yang benar
-        tot_lt_raw  = row.get("tot_lt")
-        bgt_lt_raw  = row.get("budget_lt")
-        stat_lt     = row.get("status_l", row.get("status_lt", "—")) # antisipasi jika terpotong
-
-        # Validasi angka secara aman agar tidak crash karena NaN
-        try:
-            tot_lt = int(float(tot_lt_raw)) if pd.notna(tot_lt_raw) and str(tot_lt_raw).strip() not in ("", "nan") else "—"
-        except:
-            tot_lt = str(tot_lt_raw)
-
-        try:
-            bgt_lt = int(float(bgt_lt_raw)) if pd.notna(bgt_lt_raw) and str(bgt_lt_raw).strip() not in ("", "nan") else "—"
-        except:
-            bgt_lt = str(bgt_lt_raw)
+        tot_lt = row.get("tot_lt", "—")
+        bgt_lt = row.get("budget_lt", "—")
+        stat_lt = row.get("status_lt", "—")
+        
+        st.write("DEBUG")
+        st.write("tot_lt =", repr(tot_lt))
+        st.write("budget_lt =", repr(bgt_lt))
+        st.write("status_lt =", repr(stat_lt))
 
         lt_color = GR if str(stat_lt).lower() == "onbudget" else (RD if str(stat_lt).lower() == "overbudget" else TX)
 
