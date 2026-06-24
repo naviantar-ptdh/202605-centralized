@@ -825,6 +825,12 @@ def run_tracking():
         tot_lt = row.get("total_lt", "—")
         bgt_lt = row.get("budget_lt1", "—")
         stat_lt = row.get("status_lt1", "—")
+
+        if pd.notna(tot_lt):
+            tot_lt = int(float(tot_lt))
+        
+        if pd.notna(bgt_lt):
+            bgt_lt = int(float(bgt_lt))        
     
 
         lt_color = GR if str(stat_lt).lower() == "onbudget" else (RD if str(stat_lt).lower() == "overbudget" else TX)
