@@ -822,22 +822,21 @@ def run_tracking():
         lvl    = row.get("level", "—")
         loc    = row.get("loc", "—")
         last   = row.get("last_progress", "—")
-        # Mengambil nilai asli dari row data
-        raw_tot = row.get("tot_lt")
-        raw_bgt = row.get("budget_lt")
-        stat_lt = row.get("status_lt", "—")
-        
-        # Cek & konversi tot_lt (Abaikan jika kosong/NaN)
-        if pd.notna(raw_tot) and str(raw_tot).strip() not in ("", "nan"):
-            tot_lt = int(float(raw_tot))
-        else:
-            tot_lt = "—"
-        
-        # Cek & konversi budget_lt (Abaikan jika kosong/NaN)
-        if pd.notna(raw_bgt) and str(raw_bgt).strip() not in ("", "nan"):
-            bgt_lt = int(float(raw_bgt))
-        else:
-            bgt_lt = "—"
+       # Ambil nilai langsung dari kolom yang benar
+        tot_lt_raw  = row.get("tot_lt")
+        bgt_lt_raw  = row.get("budget_lt")
+        stat_lt     = row.get("status_l", row.get("status_lt", "—")) # antisipasi jika terpotong
+
+        # Validasi angka secara aman agar tidak crash karena NaN
+        try:
+            tot_lt = int(float(tot_lt_raw)) if pd.notna(tot_lt_raw) and str(tot_lt_raw).strip() not in ("", "nan") else "—"
+        except:
+            tot_lt = str(tot_lt_raw)
+
+        try:
+            bgt_lt = int(float(bgt_lt_raw)) if pd.notna(bgt_lt_raw) and str(bgt_lt_raw).strip() not in ("", "nan") else "—"
+        except:
+            bgt_lt = str(bgt_lt_raw)
 
         lt_color = GR if str(stat_lt).lower() == "onbudget" else (RD if str(stat_lt).lower() == "overbudget" else TX)
 
