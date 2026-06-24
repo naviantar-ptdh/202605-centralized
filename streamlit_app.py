@@ -822,9 +822,9 @@ def run_tracking():
         lvl    = row.get("level", "—")
         loc    = row.get("loc", "—")
         last   = row.get("last_progress", "—")
-        tot_lt = row.get("total_lt", "—")
-        bgt_lt = row.get("budget_lt", "—")
-        stat_lt = row.get("status_lt", "—")
+        tot_lt = row.get("tot_lt23", "—")
+        bgt_lt = row.get("budget_lt5", "—")
+        stat_lt = row.get("status_lt1", "—")
     
 
         lt_color = GR if str(stat_lt).lower() == "onbudget" else (RD if str(stat_lt).lower() == "overbudget" else TX)
