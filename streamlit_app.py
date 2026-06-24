@@ -822,11 +822,22 @@ def run_tracking():
         lvl    = row.get("level", "—")
         loc    = row.get("loc", "—")
         last   = row.get("last_progress", "—")
-        tot_lt = row.get("tot_lt", row.get("total_lt", "—"))
-        bgt_lt = row.get("budget_lt", "—")
+        # Mengambil nilai asli dari row data
+        raw_tot = row.get("tot_lt")
+        raw_bgt = row.get("budget_lt")
         stat_lt = row.get("status_lt", "—")
-        if isinstance(tot_lt, float): tot_lt = int(tot_lt)
-        if isinstance(bgt_lt, float): bgt_lt = int(bgt_lt)
+        
+        # Cek & konversi tot_lt (Abaikan jika kosong/NaN)
+        if pd.notna(raw_tot) and str(raw_tot).strip() not in ("", "nan"):
+            tot_lt = int(float(raw_tot))
+        else:
+            tot_lt = "—"
+        
+        # Cek & konversi budget_lt (Abaikan jika kosong/NaN)
+        if pd.notna(raw_bgt) and str(raw_bgt).strip() not in ("", "nan"):
+            bgt_lt = int(float(raw_bgt))
+        else:
+            bgt_lt = "—"
 
         lt_color = GR if str(stat_lt).lower() == "onbudget" else (RD if str(stat_lt).lower() == "overbudget" else TX)
 
