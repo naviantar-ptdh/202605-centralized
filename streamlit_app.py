@@ -825,11 +825,7 @@ def run_tracking():
         tot_lt = row.get("tot_lt", "—")
         bgt_lt = row.get("budget_lt", "—")
         stat_lt = row.get("status_lt", "—")
-        
-        st.write("DEBUG")
-        st.write("tot_lt =", repr(tot_lt))
-        st.write("budget_lt =", repr(bgt_lt))
-        st.write("status_lt =", repr(stat_lt))
+    
 
         lt_color = GR if str(stat_lt).lower() == "onbudget" else (RD if str(stat_lt).lower() == "overbudget" else TX)
 
