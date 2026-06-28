@@ -687,7 +687,8 @@ def _steps_table(p_data):
 
         lt_a = s["lt_actual"]
         lt_b = s["lt_budget"]
-        sla = (s["sla"] or "").lower()
+        sla_raw = (s["sla"] or "").strip()
+        sla = "" if sla_raw.lower() in ("nan", "none") else sla_raw.lower()
         if lt_a is None:
             lt_chip = (f'<span style="display:inline-block;padding:3px 10px;border-radius:999px;'
                        f'background:{GY2};color:{GY4};font-size:11px;font-weight:500;">'
@@ -700,12 +701,15 @@ def _steps_table(p_data):
                        f'background:{c_bg};color:{c_fg};font-size:11px;font-weight:600;">'
                        f'{lt_a}d{bpart}</span>')
 
-        if "ontime" in sla:
+        sla_clean = sla.strip().lower()
+        if sla_clean in ("", "nan", "none"):
+            sla_clean = ""
+        if "ontime" in sla_clean:
             s_bg, s_fg, s_lbl = GR_L, GR, "On time"
-        elif "late" in sla:
+        elif "late" in sla_clean:
             s_bg, s_fg, s_lbl = RD_L, RD, "Late"
         else:
-            s_bg, s_fg, s_lbl = GY2, GY4, s["sla"] or "—"
+            s_bg, s_fg, s_lbl = GY2, GY4, "—"
         sla_chip = (f'<span style="display:inline-block;padding:3px 10px;border-radius:999px;'
                     f'background:{s_bg};color:{s_fg};font-size:11px;font-weight:600;">'
                     f'{s_lbl}</span>')
@@ -1035,7 +1039,7 @@ def run_tracking():
         lvl    = row.get("level", "—")
         loc    = row.get("loc", "—")
         last   = row.get("last_progress", "—")
-        tot_lt = row.get("total_lt", "—")
+        tot_lt = row.get("tot_lt", "—")
         bgt_lt = row.get("budget_lt1", "—")
         stat_lt = row.get("status_lt1", "—")
 
@@ -1099,7 +1103,8 @@ def run_tracking():
 
             lt_actual = row.get(lt_col)
             lt_budget = row.get(b_lt_col)
-            sla_v     = str(row.get(sla_col, "")).strip()
+            sla_v_raw = str(row.get(sla_col, "")).strip()
+            sla_v     = "" if sla_v_raw.lower() in ("nan", "none") else sla_v_raw
             lt_a_str  = str(int(float(lt_actual))) if pd.notna(lt_actual) and str(lt_actual).strip() not in ("", "nan") else None
             lt_b_str  = str(int(float(lt_budget))) if pd.notna(lt_budget) and str(lt_budget).strip() not in ("", "nan") else None
 
