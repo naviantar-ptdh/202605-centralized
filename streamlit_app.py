@@ -1,4 +1,3 @@
-Streamlit code lama:
 """
 HR Recruitment Portal — PT Dharma Henwa
 v6: Full redesign — clean, professional, inspired by career.ptdh.co.id
