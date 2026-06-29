@@ -124,7 +124,6 @@ html, body, .stApp {{
 ::-webkit-scrollbar-track {{ background: {GY2}; }}
 ::-webkit-scrollbar-thumb {{ background: {GY3}; border-radius: 999px; }}
 
-/* ── Top Navigation Bar ── */
 .nav {{
   height: 60px;
   background: #fff;
@@ -137,481 +136,194 @@ html, body, .stApp {{
   top: 0;
   z-index: 999;
 }}
-.nav-brand {{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}}
-.nav-divider {{
-  width: 1px;
-  height: 22px;
-  background: {GY3};
-}}
-.nav-title {{
-  font-size: 13px;
-  font-weight: 600;
-  color: {TX2};
-  letter-spacing: -0.01em;
-}}
-.nav-right {{
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}}
-.nav-date {{
-  font-size: 12px;
-  color: {GY4};
-}}
+.nav-brand {{ display: flex; align-items: center; gap: 12px; }}
+.nav-divider {{ width: 1px; height: 22px; background: {GY3}; }}
+.nav-title {{ font-size: 13px; font-weight: 600; color: {TX2}; letter-spacing: -0.01em; }}
+.nav-right {{ display: flex; align-items: center; gap: 16px; }}
+.nav-date {{ font-size: 12px; color: {GY4}; }}
 .nav-live {{
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 600;
-  color: {GR};
-  background: {GR_L};
-  border: 1px solid {GR_M};
-  padding: 4px 12px;
-  border-radius: 999px;
-  letter-spacing: 0.02em;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; color: {GR};
+  background: {GR_L}; border: 1px solid {GR_M};
+  padding: 4px 12px; border-radius: 999px; letter-spacing: 0.02em;
 }}
 .nav-live-dot {{
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: {GR};
+  width: 6px; height: 6px; border-radius: 50%; background: {GR};
   animation: blink 2s ease-in-out infinite;
 }}
-@keyframes blink {{
-  0%, 100% {{ opacity: 1; }}
-  50% {{ opacity: 0.3; }}
-}}
+@keyframes blink {{ 0%, 100% {{ opacity: 1; }} 50% {{ opacity: 0.3; }} }}
 
-/* ── Page wrapper ── */
-.page {{
-  max-width: 1160px;
-  margin: 0 auto;
-  padding: 40px 32px 80px;
-}}
+.page {{ max-width: 1160px; margin: 0 auto; padding: 40px 32px 80px; }}
 
-/* ── Page header ── */
-.page-header {{
-  margin-bottom: 32px;
-}}
+.page-header {{ margin-bottom: 32px; }}
 .page-eyebrow {{
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: {OR};
-  margin-bottom: 6px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: {OR}; margin-bottom: 6px;
 }}
 .page-title {{
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: {TX};
-  margin: 0 0 6px 0;
+  font-size: 26px; font-weight: 700; letter-spacing: -0.03em;
+  color: {TX}; margin: 0 0 6px 0;
 }}
-.page-subtitle {{
-  font-size: 13.5px;
-  color: {TX2};
-  line-height: 1.6;
-  margin: 0;
-}}
+.page-subtitle {{ font-size: 13.5px; color: {TX2}; line-height: 1.6; margin: 0; }}
 
-/* ── Divider ── */
-.divider {{
-  height: 1px;
-  background: {GY3};
-  margin: 24px 0;
-}}
+.divider {{ height: 1px; background: {GY3}; margin: 24px 0; }}
 
-/* ── Section label ── */
 .section-label {{
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: {GY4};
-  margin: 0 0 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: {GY4}; margin: 0 0 14px;
+  display: flex; align-items: center; gap: 10px;
 }}
-.section-label::after {{
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: {GY3};
-}}
+.section-label::after {{ content: ''; flex: 1; height: 1px; background: {GY3}; }}
 
-/* ── Nav Cards (Home) ── */
 .nav-card {{
-  background: #fff;
-  border: 1px solid {GY3};
-  border-radius: 14px;
-  padding: 28px;
-  transition: box-shadow 0.15s, border-color 0.15s;
-  position: relative;
-  overflow: hidden;
+  background: #fff; border: 1px solid {GY3}; border-radius: 14px;
+  padding: 28px; transition: box-shadow 0.15s, border-color 0.15s;
+  position: relative; overflow: hidden;
 }}
-.nav-card:hover {{
-  border-color: {OR_M};
-  box-shadow: 0 4px 24px rgba(232,68,10,.08);
-}}
+.nav-card:hover {{ border-color: {OR_M}; box-shadow: 0 4px 24px rgba(232,68,10,.08); }}
 .nav-card-top-stripe {{
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: {OR};
-  border-radius: 14px 14px 0 0;
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: {OR}; border-radius: 14px 14px 0 0;
 }}
 .nav-card-icon {{
-  width: 44px;
-  height: 44px;
-  background: {OR_L};
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  margin-bottom: 16px;
+  width: 44px; height: 44px; background: {OR_L}; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; margin-bottom: 16px;
 }}
-.nav-card-title {{
-  font-size: 15px;
-  font-weight: 700;
-  color: {TX};
-  margin-bottom: 6px;
-}}
-.nav-card-desc {{
-  font-size: 13px;
-  color: {TX2};
-  line-height: 1.65;
-}}
+.nav-card-title {{ font-size: 15px; font-weight: 700; color: {TX}; margin-bottom: 6px; }}
+.nav-card-desc {{ font-size: 13px; color: {TX2}; line-height: 1.65; }}
 .nav-card-cta {{
-  margin-top: 18px;
-  font-size: 12px;
-  font-weight: 600;
-  color: {OR};
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  margin-top: 18px; font-size: 12px; font-weight: 600; color: {OR};
+  display: flex; align-items: center; gap: 4px;
 }}
 
-/* ── Dashboard frame ── */
 .dash-frame {{
-  background: #fff;
-  border: 1px solid {GY3};
-  border-radius: 14px;
-  overflow: hidden;
-  margin-bottom: 32px;
+  background: #fff; border: 1px solid {GY3}; border-radius: 14px;
+  overflow: hidden; margin-bottom: 32px;
 }}
 .dash-frame-header {{
-  padding: 14px 20px;
-  border-bottom: 1px solid {GY3};
-  background: {GY2};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid {GY3};
+  background: {GY2}; display: flex; align-items: center; justify-content: space-between;
 }}
 .dash-frame-title {{
-  font-size: 12.5px;
-  font-weight: 600;
-  color: {TX2};
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-size: 12.5px; font-weight: 600; color: {TX2};
+  display: flex; align-items: center; gap: 8px;
 }}
-.dash-frame-dots {{
-  display: flex;
-  gap: 5px;
-}}
-.dash-frame-dots span {{
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  display: block;
-}}
+.dash-frame-dots {{ display: flex; gap: 5px; }}
+.dash-frame-dots span {{ width: 9px; height: 9px; border-radius: 50%; display: block; }}
 
-/* ── Candidate Hero Card ── */
 .cand-hero {{
-  background: #fff;
-  border: 1px solid {GY3};
-  border-radius: 14px;
-  padding: 24px 28px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  background: #fff; border: 1px solid {GY3}; border-radius: 14px;
+  padding: 24px 28px; margin-bottom: 16px;
+  display: flex; align-items: center; justify-content: space-between;
 }}
 
-/* ── Info Grid ── */
 .info-grid {{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 16px;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 10px; margin-bottom: 16px;
 }}
 .info-item {{
-  background: #fff;
-  border: 1px solid {GY3};
-  border-radius: 10px;
-  padding: 14px 16px;
+  background: #fff; border: 1px solid {GY3};
+  border-radius: 10px; padding: 14px 16px;
 }}
 .info-label {{
-  font-size: 10.5px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: {GY4};
-  margin-bottom: 4px;
+  font-size: 10.5px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.07em; color: {GY4}; margin-bottom: 4px;
 }}
-.info-val {{
-  font-size: 13px;
-  font-weight: 600;
-  color: {TX};
-}}
+.info-val {{ font-size: 13px; font-weight: 600; color: {TX}; }}
 
-/* ── Progress bar ── */
 .prog-wrap {{
-  background: #fff;
-  border: 1px solid {GY3};
-  border-radius: 12px;
-  padding: 18px 22px;
-  margin-bottom: 16px;
+  background: #fff; border: 1px solid {GY3};
+  border-radius: 12px; padding: 18px 22px; margin-bottom: 16px;
 }}
-.prog-top {{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}}
-.prog-label {{
-  font-size: 13px;
-  font-weight: 600;
-  color: {TX};
-}}
-.prog-count {{
-  font-size: 12px;
-  color: {GY4};
-}}
-.prog-track {{
-  height: 6px;
-  background: {GY3};
-  border-radius: 999px;
-  overflow: hidden;
-  margin-bottom: 8px;
-}}
-.prog-pct {{
-  font-size: 12px;
-  font-weight: 700;
-  color: {OR};
-  text-align: right;
-}}
+.prog-top {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }}
+.prog-label {{ font-size: 13px; font-weight: 600; color: {TX}; }}
+.prog-count {{ font-size: 12px; color: {GY4}; }}
+.prog-track {{ height: 6px; background: {GY3}; border-radius: 999px; overflow: hidden; margin-bottom: 8px; }}
+.prog-pct {{ font-size: 12px; font-weight: 700; color: {OR}; text-align: right; }}
 
-/* ── Metrics ── */
 div[data-testid="metric-container"] {{
-  background: #fff !important;
-  border: 1px solid {GY3} !important;
-  border-radius: 10px !important;
-  padding: 16px 18px !important;
+  background: #fff !important; border: 1px solid {GY3} !important;
+  border-radius: 10px !important; padding: 16px 18px !important;
 }}
 div[data-testid="metric-container"] label {{
-  font-size: 10.5px !important;
-  font-weight: 600 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.07em !important;
-  color: {GY4} !important;
+  font-size: 10.5px !important; font-weight: 600 !important;
+  text-transform: uppercase !important; letter-spacing: 0.07em !important; color: {GY4} !important;
 }}
 div[data-testid="metric-container"] [data-testid="stMetricValue"] {{
-  font-size: 26px !important;
-  font-weight: 700 !important;
-  color: {TX} !important;
-  letter-spacing: -0.02em !important;
+  font-size: 26px !important; font-weight: 700 !important;
+  color: {TX} !important; letter-spacing: -0.02em !important;
 }}
 
-/* ── Radio pills ── */
-.stRadio > div {{
-  flex-direction: row !important;
-  gap: 6px !important;
-  flex-wrap: wrap !important;
-}}
+.stRadio > div {{ flex-direction: row !important; gap: 6px !important; flex-wrap: wrap !important; }}
 .stRadio label {{
-  background: #fff !important;
-  border: 1px solid {GY3} !important;
-  border-radius: 8px !important;
-  padding: 7px 18px !important;
-  font-size: 12.5px !important;
-  font-weight: 500 !important;
-  cursor: pointer !important;
-  color: {TX2} !important;
-  transition: all 0.15s !important;
+  background: #fff !important; border: 1px solid {GY3} !important;
+  border-radius: 8px !important; padding: 7px 18px !important;
+  font-size: 12.5px !important; font-weight: 500 !important;
+  cursor: pointer !important; color: {TX2} !important; transition: all 0.15s !important;
 }}
 .stRadio label:has(input:checked) {{
-  background: {OR_L} !important;
-  border-color: {OR_M} !important;
-  color: {OR} !important;
-  font-weight: 600 !important;
+  background: {OR_L} !important; border-color: {OR_M} !important;
+  color: {OR} !important; font-weight: 600 !important;
 }}
 
-/* ── Selectbox ── */
 div[data-testid="stSelectbox"] > div > div {{
-  background: #fff !important;
-  border: 1px solid {GY3} !important;
-  border-radius: 8px !important;
-  color: {TX} !important;
-  font-size: 13px !important;
+  background: #fff !important; border: 1px solid {GY3} !important;
+  border-radius: 8px !important; color: {TX} !important; font-size: 13px !important;
 }}
 
-/* ── Buttons ── */
 button[kind="primary"] {{
-  background: {OR} !important;
-  border: none !important;
-  color: #fff !important;
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 600 !important;
-  font-size: 13px !important;
-  border-radius: 8px !important;
-  letter-spacing: -0.01em !important;
-  transition: opacity 0.15s !important;
+  background: {OR} !important; border: none !important; color: #fff !important;
+  font-family: 'Inter', sans-serif !important; font-weight: 600 !important;
+  font-size: 13px !important; border-radius: 8px !important;
+  letter-spacing: -0.01em !important; transition: opacity 0.15s !important;
 }}
 button[kind="primary"]:hover {{ opacity: 0.88 !important; }}
 button[kind="secondary"] {{
-  background: #fff !important;
-  border: 1px solid {GY3} !important;
-  color: {TX2} !important;
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 500 !important;
-  font-size: 13px !important;
-  border-radius: 8px !important;
+  background: #fff !important; border: 1px solid {GY3} !important;
+  color: {TX2} !important; font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important; font-size: 13px !important; border-radius: 8px !important;
 }}
-button[kind="secondary"]:hover {{
-  border-color: {GY4} !important;
-  color: {TX} !important;
-}}
+button[kind="secondary"]:hover {{ border-color: {GY4} !important; color: {TX} !important; }}
 
-/* ── Dataframe ── */
 div[data-testid="stDataFrame"] {{
-  border-radius: 10px !important;
-  border: 1px solid {GY3} !important;
-  overflow: hidden !important;
+  border-radius: 10px !important; border: 1px solid {GY3} !important; overflow: hidden !important;
 }}
 
-/* ── Filter bar ── */
-.filter-bar {{
-  background: #fff;
-  border: 1px solid {GY3};
-  border-radius: 12px;
-  padding: 16px 20px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}}
-.filter-label {{
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: {GY4};
-  margin-right: 4px;
-  white-space: nowrap;
-}}
-
-/* ── Site cards (Rec Room) ── */
-.site-grid {{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
-}}
 .site-card {{
-  background: #fff;
-  border: 1px solid {GY3};
-  border-radius: 14px;
-  overflow: hidden;
-  transition: box-shadow 0.15s;
+  background: #fff; border: 1px solid {GY3}; border-radius: 14px;
+  overflow: hidden; transition: box-shadow 0.15s;
 }}
-.site-card:hover {{
-  box-shadow: 0 4px 20px rgba(0,0,0,.06);
-}}
+.site-card:hover {{ box-shadow: 0 4px 20px rgba(0,0,0,.06); }}
 .site-card-header {{
-  padding: 16px 20px 14px;
-  border-bottom: 1px solid {GY3};
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  padding: 16px 20px 14px; border-bottom: 1px solid {GY3};
+  display: flex; align-items: center; gap: 12px;
 }}
 .site-card-icon {{
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 17px;
-  flex-shrink: 0;
+  width: 36px; height: 36px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; flex-shrink: 0;
 }}
-.site-card-name {{
-  font-size: 14px;
-  font-weight: 700;
-  color: {TX};
-  line-height: 1.2;
-}}
-.site-card-sub {{
-  font-size: 11px;
-  color: {GY4};
-  margin-top: 2px;
-}}
+.site-card-name {{ font-size: 14px; font-weight: 700; color: {TX}; line-height: 1.2; }}
+.site-card-sub {{ font-size: 11px; color: {GY4}; margin-top: 2px; }}
 .site-card-badge {{
-  margin-left: auto;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  padding: 3px 10px;
-  border-radius: 999px;
+  margin-left: auto; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 999px;
 }}
-.site-card-body {{
-  padding: 16px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}}
-.site-link-row {{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}}
+.site-card-body {{ padding: 16px 20px; display: flex; flex-direction: column; gap: 10px; }}
+.site-link-row {{ display: flex; align-items: center; gap: 10px; }}
 .site-link-type {{
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: {GY4};
-  width: 72px;
-  flex-shrink: 0;
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: {GY4}; width: 72px; flex-shrink: 0;
 }}
 .site-link-url {{
-  font-size: 11.5px;
-  color: {TX2};
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 11.5px; color: {TX2}; flex: 1;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   font-family: 'SF Mono', 'Fira Code', monospace;
-  background: {GY2};
-  border: 1px solid {GY3};
-  border-radius: 6px;
-  padding: 5px 10px;
+  background: {GY2}; border: 1px solid {GY3}; border-radius: 6px; padding: 5px 10px;
 }}
-.site-link-url.disabled {{
-  color: {GY4};
-  font-style: italic;
-  font-family: 'Inter', sans-serif;
-}}
+.site-link-url.disabled {{ color: {GY4}; font-style: italic; font-family: 'Inter', sans-serif; }}
 </style>
 """
 
@@ -633,9 +345,7 @@ st.markdown(f"""
   </div>
   <div class="nav-right">
     <span class="nav-date">{datetime.now().strftime('%d %B %Y')}</span>
-    <span class="nav-live">
-      <span class="nav-live-dot"></span>Live
-    </span>
+    <span class="nav-live"><span class="nav-live-dot"></span>Live</span>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -651,11 +361,16 @@ def badge(text, bg, fg):
 
 def _status_cfg(cls):
     return {
-        "done":   (GR_L,  GR,  GR_M),
-        "failed": (RD_L,  RD,  RD_M),
-        "active": (OR_L,  OR,  OR_M),
-        "idle":   (GY2,   GY4, GY3),
+        "done":   (GR_L, GR,  GR_M),
+        "failed": (RD_L, RD,  RD_M),
+        "active": (OR_L, OR,  OR_M),
+        "idle":   (GY2,  GY4, GY3),
     }.get(cls, (GY2, GY4, GY3))
+
+def _clean_sla(raw):
+    """Return empty string for nan/none/empty, otherwise lowercase value."""
+    s = str(raw).strip().lower()
+    return "" if s in ("nan", "none", "") else s
 
 def _steps_table(p_data):
     TH = (f"font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;"
@@ -675,19 +390,20 @@ def _steps_table(p_data):
     for i, s in enumerate(p_data):
         cls = s["status"]
         bg, fg, bd = _status_cfg(cls)
-        icon_map = {"done": "✓", "failed": "✕", "active": str(s["idx"]+1), "idle": str(s["idx"]+1)}
-        icon = icon_map.get(cls, str(s["idx"]+1))
+        icon_map  = {"done": "✓", "failed": "✕", "active": str(s["idx"]+1), "idle": str(s["idx"]+1)}
         badge_map = {"done": "Done", "failed": "Failed Here", "active": "In Progress", "idle": "Pending"}
+        icon      = icon_map.get(cls, str(s["idx"]+1))
         badge_txt = badge_map.get(cls, "—")
-        row_bg = "#fff" if i % 2 == 0 else GY1
-        bb = f"border-bottom:1px solid {GY3};" if i < len(p_data) - 1 else ""
-
-        name_color = RD if cls == "failed" else TX
+        row_bg    = "#fff" if i % 2 == 0 else GY1
+        bb        = f"border-bottom:1px solid {GY3};" if i < len(p_data) - 1 else ""
+        name_color  = RD  if cls == "failed" else TX
         name_weight = "700" if cls == "failed" else "600"
 
         lt_a = s["lt_actual"]
         lt_b = s["lt_budget"]
-        sla = (s["sla"] or "").lower()
+        sla  = _clean_sla(s["sla"])
+
+        # LT chip
         if lt_a is None:
             lt_chip = (f'<span style="display:inline-block;padding:3px 10px;border-radius:999px;'
                        f'background:{GY2};color:{GY4};font-size:11px;font-weight:500;">'
@@ -700,12 +416,13 @@ def _steps_table(p_data):
                        f'background:{c_bg};color:{c_fg};font-size:11px;font-weight:600;">'
                        f'{lt_a}d{bpart}</span>')
 
+        # SLA chip
         if "ontime" in sla:
             s_bg, s_fg, s_lbl = GR_L, GR, "On time"
         elif "late" in sla:
             s_bg, s_fg, s_lbl = RD_L, RD, "Late"
         else:
-            s_bg, s_fg, s_lbl = GY2, GY4, s["sla"] or "—"
+            s_bg, s_fg, s_lbl = GY2, GY4, "—"
         sla_chip = (f'<span style="display:inline-block;padding:3px 10px;border-radius:999px;'
                     f'background:{s_bg};color:{s_fg};font-size:11px;font-weight:600;">'
                     f'{s_lbl}</span>')
@@ -741,10 +458,8 @@ def load_data():
         for c in ["candidate_id", "position_name", "departement", "level", "loc", "status1"]:
             if c in df.columns:
                 df[c] = df[c].fillna("Unknown")
-        # Normalize loc: uppercase strip
         if "loc" in df.columns:
             df["loc"] = df["loc"].str.strip().str.upper()
-        # Parse start_interview_user as datetime for month/year filter
         if "start_interview_user" in df.columns:
             df["_interview_dt"] = pd.to_datetime(df["start_interview_user"], errors="coerce")
         return df, None
@@ -753,7 +468,6 @@ def load_data():
 
 
 def _site_label(loc_val):
-    """Map a loc value to site key."""
     loc_val = str(loc_val).strip().upper()
     for key, cfg in SITES.items():
         if loc_val in [v.upper() for v in cfg["loc_values"]]:
@@ -766,7 +480,6 @@ def _site_label(loc_val):
 # ══════════════════════════════════════════
 def run_home():
     st.markdown('<div class="page">', unsafe_allow_html=True)
-
     st.markdown(f"""
     <div class="page-header">
       <div class="page-eyebrow">PT Dharma Henwa — Internal</div>
@@ -797,7 +510,6 @@ def run_home():
     """, unsafe_allow_html=True)
 
     st.markdown('<div class="section-label" style="margin-top:32px;">Recruitment Tools</div>', unsafe_allow_html=True)
-
     c1, c2 = st.columns(2, gap="large")
     with c1:
         st.markdown(f"""
@@ -813,7 +525,6 @@ def run_home():
         if st.button("Open Candidate Tracking", key="btn_tracking", use_container_width=True, type="primary"):
             st.session_state.page = "tracking"
             st.rerun()
-
     with c2:
         st.markdown(f"""
         <div class="nav-card">
@@ -828,7 +539,6 @@ def run_home():
         if st.button("Open Recruitment Room", key="btn_recroom", use_container_width=True, type="primary"):
             st.session_state.page = "rec_room"
             st.rerun()
-
     st.markdown("</div>", unsafe_allow_html=True)
 
 
@@ -865,68 +575,53 @@ def run_tracking():
     mode = st.radio("Search Mode", ["By Position", "By Candidate"], horizontal=True, key="m_track")
     st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
 
-    # ── MONTH NAMES ──
     MONTH_NAMES = {
         1: "January", 2: "February", 3: "March", 4: "April",
         5: "May", 6: "June", 7: "July", 8: "August",
         9: "September", 10: "October", 11: "November", 12: "December"
     }
 
-    # ── BY POSITION ──
+    # ── Shared: build site options ──
+    all_sites_in_data = []
+    if "loc" in df.columns:
+        for loc_val in df["loc"].dropna().unique():
+            sk = _site_label(loc_val)
+            if sk and sk not in all_sites_in_data:
+                all_sites_in_data.append(sk)
+    site_labels_map      = {k: SITES[k]["label"] for k in all_sites_in_data}
+    site_display_options = ["All"] + [site_labels_map[k] for k in sorted(site_labels_map)]
+
+    # ══ BY POSITION ══
     if mode == "By Position":
-        # Build filter options from data
-        years_available = []
-        months_available = []
+        years_available, months_available = [], []
         if "_interview_dt" in df.columns:
-            valid_dt = df["_interview_dt"].dropna()
-            years_available  = sorted(valid_dt.dt.year.unique().tolist(),  reverse=True)
+            valid_dt        = df["_interview_dt"].dropna()
+            years_available  = sorted(valid_dt.dt.year.unique().tolist(), reverse=True)
             months_available = sorted(valid_dt.dt.month.unique().tolist())
 
         year_options  = ["All"] + [str(y) for y in years_available]
         month_options = ["All"] + [MONTH_NAMES[m] for m in months_available]
 
-        # Site options
-        all_sites_in_data = []
-        if "loc" in df.columns:
-            for loc_val in df["loc"].dropna().unique():
-                sk = _site_label(loc_val)
-                if sk and sk not in all_sites_in_data:
-                    all_sites_in_data.append(sk)
-        site_labels_map = {k: SITES[k]["label"] for k in all_sites_in_data}
-        site_display_options = ["All"] + [site_labels_map[k] for k in sorted(site_labels_map)]
-
-        # Filter row
         fc1, fc2, fc3 = st.columns([2, 2, 2])
         with fc1:
-            sel_year  = st.selectbox("Year", year_options,  key="f_year_pos")
+            sel_year  = st.selectbox("Year",  year_options,         key="f_year_pos")
         with fc2:
-            sel_month = st.selectbox("Month", month_options, key="f_month_pos")
+            sel_month = st.selectbox("Month", month_options,        key="f_month_pos")
         with fc3:
-            sel_site  = st.selectbox("Site", site_display_options, key="f_site_pos")
+            sel_site  = st.selectbox("Site",  site_display_options, key="f_site_pos")
 
         st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
-        # Apply filters
         filtered_base = df.copy()
-
-        # Year filter
         if sel_year != "All" and "_interview_dt" in filtered_base.columns:
-            filtered_base = filtered_base[
-                filtered_base["_interview_dt"].dt.year == int(sel_year)
-            ]
-
-        # Month filter
+            filtered_base = filtered_base[filtered_base["_interview_dt"].dt.year == int(sel_year)]
         if sel_month != "All" and "_interview_dt" in filtered_base.columns:
-            month_num = [k for k, v in MONTH_NAMES.items() if v == sel_month][0]
-            filtered_base = filtered_base[
-                filtered_base["_interview_dt"].dt.month == month_num
-            ]
-
-        # Site filter
+            month_num     = [k for k, v in MONTH_NAMES.items() if v == sel_month][0]
+            filtered_base = filtered_base[filtered_base["_interview_dt"].dt.month == month_num]
         if sel_site != "All" and "loc" in filtered_base.columns:
-            target_site_key = [k for k, v in site_labels_map.items() if v == sel_site]
-            if target_site_key:
-                loc_vals = [v.upper() for v in SITES[target_site_key[0]]["loc_values"]]
+            tsk = [k for k, v in site_labels_map.items() if v == sel_site]
+            if tsk:
+                loc_vals      = [v.upper() for v in SITES[tsk[0]]["loc_values"]]
                 filtered_base = filtered_base[filtered_base["loc"].isin(loc_vals)]
 
         pos_list = sorted(filtered_base["position_name"].dropna().unique())
@@ -937,19 +632,19 @@ def run_tracking():
 
         sel_pos  = st.selectbox("Select Position", pos_list, key="s_pos")
         filtered = filtered_base[filtered_base["position_name"] == sel_pos].copy()
-
         st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
 
         if "status1" in filtered.columns:
             su = filtered["status1"].str.upper()
             m1, m2, m3, m4 = st.columns(4)
-            m1.metric("Total", len(filtered))
+            m1.metric("Total",       len(filtered))
             m2.metric("On Progress", int((su == "OPEN").sum()))
-            m3.metric("Hired", int((su == "CLOSE").sum()))
-            m4.metric("Failed", int((su == "FAILED").sum()))
+            m3.metric("Hired",       int((su == "CLOSE").sum()))
+            m4.metric("Failed",      int((su == "FAILED").sum()))
 
         st.markdown("<div style='height:14px'></div>", unsafe_allow_html=True)
-        cols = [c for c in ["candidate_id", "position_name", "departement", "level", "loc", "last_progress", "tot_lt", "status1"] if c in filtered.columns]
+        cols = [c for c in ["candidate_id", "position_name", "departement", "level", "loc",
+                             "last_progress", "tot_lt", "status1"] if c in filtered.columns]
         disp = filtered[cols].copy()
         if "tot_lt" in disp.columns:
             disp["tot_lt"] = pd.to_numeric(disp["tot_lt"], errors="coerce").fillna(0).astype(int)
@@ -968,28 +663,17 @@ def run_tracking():
             use_container_width=True, height=380
         )
 
-    # ── BY CANDIDATE ──
+    # ══ BY CANDIDATE ══
     else:
-        # Site filter only
-        all_sites_in_data = []
-        if "loc" in df.columns:
-            for loc_val in df["loc"].dropna().unique():
-                sk = _site_label(loc_val)
-                if sk and sk not in all_sites_in_data:
-                    all_sites_in_data.append(sk)
-        site_labels_map = {k: SITES[k]["label"] for k in all_sites_in_data}
-        site_display_options = ["All"] + [site_labels_map[k] for k in sorted(site_labels_map)]
-
         fc1, = [st.columns(1)[0]]
         sel_site = st.selectbox("Filter by Site", site_display_options, key="f_site_cand")
-
         st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
 
         filtered_base = df.copy()
         if sel_site != "All" and "loc" in filtered_base.columns:
-            target_site_key = [k for k, v in site_labels_map.items() if v == sel_site]
-            if target_site_key:
-                loc_vals = [v.upper() for v in SITES[target_site_key[0]]["loc_values"]]
+            tsk = [k for k, v in site_labels_map.items() if v == sel_site]
+            if tsk:
+                loc_vals      = [v.upper() for v in SITES[tsk[0]]["loc_values"]]
                 filtered_base = filtered_base[filtered_base["loc"].isin(loc_vals)]
 
         cand_list = sorted(filtered_base["candidate_id"].dropna().unique())
@@ -999,45 +683,44 @@ def run_tracking():
             return
 
         sel_cand = st.selectbox("Select Candidate ID", cand_list, key="s_cand")
-        filt = filtered_base[filtered_base["candidate_id"] == sel_cand]
+        filt     = filtered_base[filtered_base["candidate_id"] == sel_cand]
         if filt.empty:
             st.warning("No data found.")
             st.markdown("</div>", unsafe_allow_html=True)
             return
 
-        row = filt.iloc[0]
-        h_st = str(row.get("status1", "Unknown")).upper()
+        row      = filt.iloc[0]
+        h_st     = str(row.get("status1", "Unknown")).upper()
         is_failed = (h_st == "FAILED")
-        is_close  = (h_st == "CLOSE")
 
-        badge_map = {
-            "OPEN":   (AM_L,  AM,  "On Progress"),
-            "CLOSE":  (GR_L,  GR,  "Hired"),
-            "FAILED": (RD_L,  RD,  "Failed"),
+        bmap = {
+            "OPEN":   (AM_L, AM, "On Progress"),
+            "CLOSE":  (GR_L, GR, "Hired"),
+            "FAILED": (RD_L, RD, "Failed"),
         }
-        b_bg, b_fg, b_txt = badge_map.get(h_st, (AM_L, AM, h_st))
+        b_bg, b_fg, b_txt = bmap.get(h_st, (AM_L, AM, h_st))
 
-        # Hero
         st.markdown(f"""
         <div class="cand-hero">
           <div>
-            <div style="font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:{GY4};margin-bottom:4px;">Candidate ID</div>
+            <div style="font-size:10.5px;font-weight:600;text-transform:uppercase;
+              letter-spacing:.08em;color:{GY4};margin-bottom:4px;">Candidate ID</div>
             <div style="font-size:22px;font-weight:700;letter-spacing:-0.02em;color:{TX};">{sel_cand}</div>
           </div>
           {badge(b_txt, b_bg, b_fg)}
         </div>
         """, unsafe_allow_html=True)
 
-        # Info grid
-        pos    = row.get("position_name", "—")
-        dept   = row.get("departement", "—")
-        divisi = row.get("divisi", "—")
-        lvl    = row.get("level", "—")
-        loc    = row.get("loc", "—")
-        last   = row.get("last_progress", "—")
-        tot_lt = row.get("total_lt", "—")
-        bgt_lt = row.get("budget_lt1", "—")
-        stat_lt = row.get("status_lt1", "—")
+        # Info grid — use total_lt as confirmed by user
+        pos     = row.get("position_name", "—")
+        dept    = row.get("departement",   "—")
+        divisi  = row.get("divisi",        "—")
+        lvl     = row.get("level",         "—")
+        loc     = row.get("loc",           "—")
+        last    = row.get("last_progress", "—")
+        tot_lt  = row.get("total_lt",      "—")
+        bgt_lt  = row.get("budget_lt1",    "—")
+        stat_lt = row.get("status_lt1",    "—")
 
         if pd.notna(tot_lt):
             try: tot_lt = int(float(tot_lt))
@@ -1058,11 +741,12 @@ def run_tracking():
           <div class="info-item"><div class="info-label">Last Progress</div><div class="info-val">{last}</div></div>
           <div class="info-item"><div class="info-label">Total LT (days)</div><div class="info-val">{tot_lt}</div></div>
           <div class="info-item"><div class="info-label">Budget LT (days)</div><div class="info-val">{bgt_lt}</div></div>
-          <div class="info-item"><div class="info-label">LT Status</div><div class="info-val" style="color:{lt_color};">{stat_lt}</div></div>
+          <div class="info-item"><div class="info-label">LT Status</div>
+            <div class="info-val" style="color:{lt_color};">{stat_lt}</div></div>
         </div>
         """, unsafe_allow_html=True)
 
-        # Steps — Technical Test ALWAYS included
+        # ── Steps — Technical Test ALWAYS at position 5 ──
         steps_def = [
             ("PRF Routing",    "start_prf_routing",    "complete_prf_routing",    "lt_prf",            "b_lt_prf",            "sla1"),
             ("Screening CV",   "start_screening_cv",   "complete_screening_cv",   "lt_screening",      "b_lt_screening",      "sla2"),
@@ -1077,13 +761,13 @@ def run_tracking():
             ("Onboarding",     "date_onboarding",      "date_onboarding",         "lt_omn",            "b_lt_omn",            "sla10"),
         ]
 
-        p_data = []
-        done_count = 0
+        p_data        = []
+        done_count    = 0
         last_data_idx = -1
 
         for i, (name, s_col, e_col, lt_col, b_lt_col, sla_col) in enumerate(steps_def):
-            s_val = row.get(s_col)
-            e_val = row.get(e_col)
+            s_val     = row.get(s_col)
+            e_val     = row.get(e_col)
             has_start = pd.notna(s_val) and str(s_val).strip() not in ("", "nan")
             has_end   = pd.notna(e_val) and str(e_val).strip() not in ("", "nan")
 
@@ -1099,19 +783,21 @@ def run_tracking():
 
             lt_actual = row.get(lt_col)
             lt_budget = row.get(b_lt_col)
-            sla_v     = str(row.get(sla_col, "")).strip()
-            lt_a_str  = str(int(float(lt_actual))) if pd.notna(lt_actual) and str(lt_actual).strip() not in ("", "nan") else None
-            lt_b_str  = str(int(float(lt_budget))) if pd.notna(lt_budget) and str(lt_budget).strip() not in ("", "nan") else None
+            sla_raw   = str(row.get(sla_col, "")).strip()
+            sla_v     = "" if sla_raw.lower() in ("nan", "none", "") else sla_raw
+
+            lt_a_str = str(int(float(lt_actual))) if pd.notna(lt_actual) and str(lt_actual).strip() not in ("", "nan") else None
+            lt_b_str = str(int(float(lt_budget))) if pd.notna(lt_budget) and str(lt_budget).strip() not in ("", "nan") else None
 
             p_data.append({
-                "name": name,
-                "start": str(s_val) if has_start else "—",
-                "end":   str(e_val) if has_end   else "—",
-                "status": st_code,
-                "idx": i,
+                "name":      name,
+                "start":     str(s_val) if has_start else "—",
+                "end":       str(e_val) if has_end   else "—",
+                "status":    st_code,
+                "idx":       i,
                 "lt_actual": lt_a_str,
                 "lt_budget": lt_b_str,
-                "sla": sla_v,
+                "sla":       sla_v,
             })
 
         if is_failed and last_data_idx >= 0:
@@ -1119,7 +805,7 @@ def run_tracking():
             if p_data[last_data_idx]["end"] != "—":
                 done_count -= 1
 
-        prog_pct = done_count / len(p_data) if p_data else 0
+        prog_pct  = done_count / len(p_data) if p_data else 0
         bar_color = RD if is_failed else OR
         pct_color = RD if is_failed else OR
 
@@ -1166,31 +852,26 @@ def run_rec_room():
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
     st.markdown('<div class="section-label">Sites</div>', unsafe_allow_html=True)
 
-    # ── Site cards in 2-column grid ──
     site_keys = list(SITES.keys())
-    pairs = [site_keys[i:i+2] for i in range(0, len(site_keys), 2)]
+    pairs     = [site_keys[i:i+2] for i in range(0, len(site_keys), 2)]
 
     for pair in pairs:
         cols = st.columns(2, gap="large")
         for col, key in zip(cols, pair):
-            cfg = SITES[key]
+            cfg       = SITES[key]
             is_active = cfg["active"]
             accent    = cfg["color"]
             accent_l  = cfg["color_l"]
-            accent_m  = cfg["color_m"]
 
             badge_html = (
-                f'<span class="site-card-badge" style="background:{accent_l};color:{accent};">'
-                f'Active</span>'
+                f'<span class="site-card-badge" style="background:{accent_l};color:{accent};">Active</span>'
                 if is_active else
-                f'<span class="site-card-badge" style="background:{GY2};color:{GY4};">'
-                f'In Progress</span>'
+                f'<span class="site-card-badge" style="background:{GY2};color:{GY4};">In Progress</span>'
             )
-
-            form_display = cfg["form_url"] if cfg["form_url"] else "— Not yet available —"
+            form_display  = cfg["form_url"]  if cfg["form_url"]  else "— Not yet available —"
             sheet_display = cfg["sheet_url"] if cfg["sheet_url"] else "— Not yet available —"
-            form_cls  = "" if cfg["form_url"]  else "disabled"
-            sheet_cls = "" if cfg["sheet_url"] else "disabled"
+            form_cls      = "" if cfg["form_url"]  else "disabled"
+            sheet_cls     = "" if cfg["sheet_url"] else "disabled"
 
             with col:
                 st.markdown(f"""
@@ -1216,52 +897,38 @@ def run_rec_room():
                 </div>
                 """, unsafe_allow_html=True)
 
-                # Action buttons below each card
                 if is_active:
                     b1, b2 = st.columns(2)
                     with b1:
                         if cfg["form_url"]:
-                            st.link_button(
-                                f"↗ Open Form",
-                                cfg["form_url"],
-                                use_container_width=True,
-                            )
+                            st.link_button("↗ Open Form",  cfg["form_url"],  use_container_width=True)
                     with b2:
                         if cfg["sheet_url"]:
-                            st.link_button(
-                                f"↗ Open Sheet",
-                                cfg["sheet_url"],
-                                use_container_width=True,
-                            )
+                            st.link_button("↗ Open Sheet", cfg["sheet_url"], use_container_width=True)
                 else:
                     st.markdown(
                         f'<p style="font-size:12px;color:{GY4};text-align:center;padding:6px 0 4px;">'
                         f'Links will be added soon</p>',
                         unsafe_allow_html=True,
                     )
-
                 st.markdown("<div style='height:4px'></div>", unsafe_allow_html=True)
 
-    # ── Quick Actions ──
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
     st.markdown('<div class="section-label">Quick Actions</div>', unsafe_allow_html=True)
 
     qa1, qa2, qa3, qa4 = st.columns(4)
     with qa1:
-        if st.button("📊  Export PPT", use_container_width=True, key="qa_ppt"):
+        if st.button("📊  Export PPT",   use_container_width=True, key="qa_ppt"):
             st.info("PPT export feature coming soon.")
     with qa2:
-        if st.button("📈  Dashboard", use_container_width=True, key="qa_mpp"):
-            st.session_state.page = "home"
-            st.rerun()
+        if st.button("📈  Dashboard",    use_container_width=True, key="qa_mpp"):
+            st.session_state.page = "home"; st.rerun()
     with qa3:
-        if st.button("🔍  Tracking", use_container_width=True, key="qa_track"):
-            st.session_state.page = "tracking"
-            st.rerun()
+        if st.button("🔍  Tracking",     use_container_width=True, key="qa_track"):
+            st.session_state.page = "tracking"; st.rerun()
     with qa4:
         if st.button("🔄  Refresh Cache", use_container_width=True, key="qa_cache"):
-            st.cache_data.clear()
-            st.success("Cache cleared!")
+            st.cache_data.clear(); st.success("Cache cleared!")
 
     st.markdown("</div>", unsafe_allow_html=True)
 
